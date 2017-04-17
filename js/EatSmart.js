@@ -103,7 +103,7 @@ function Generate(){
 	
 	
 	//json format data resource url 
-	var USDAurl = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=47906";
+	var USDAurl = "https://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=47906";
 	//Use the zip code and return all market ids in area.
 	
 	var NCDCurl = "";
@@ -133,7 +133,7 @@ function Generate(){
 					type: "GET",
 					contentType: "application/json; charset=utf-8",
 					// submit a get request to the restful service mktDetail.
-					url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + v,
+					url: "https://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + v,
 					dataType: 'jsonp',
 
 					success: function (data) {
@@ -520,5 +520,3 @@ function SetClimate(div,name){
 	    }
 	});
 }
-
-$('#myTab').tabCollapse();
