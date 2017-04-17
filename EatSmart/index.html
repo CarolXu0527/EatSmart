@@ -50,8 +50,8 @@
 		
 		.panel{
 			background-color: #d2d7db;
-			border-radius: 6px 6px 6px 6px;
-			height:500px;
+			border-radius: 0px 0px 6px 6px;
+			height:460px;
 			padding-bottom: 20px;
 			padding-top: 20px;
 			overflow-y:scroll;
@@ -59,6 +59,27 @@
 		
 		.panel-inside{
 			margin-left: 20px;
+		}
+		
+		.bullet { font: 10px sans-serif; }
+		.bullet .marker { stroke: #1E9E8A; stroke-width: 6px; }
+		.bullet .tick line { stroke: #666; stroke-width: .5px; }
+		.bullet .range.s0 { fill: #F6F4F3; }
+		.bullet .range.s1 { fill: #ddd; }
+		.bullet .range.s2 { fill: #ccc; }
+		.bullet .measure.s0 { fill: #183059; }
+		.bullet .measure.s1 { fill: #457B9D; }
+		.bullet .title { font-size: 16px; color: #34495e; }
+		.bullet .subtitle { fill: #34495e; }
+
+		.navtab{
+			background-color: #769FB6;
+		    margin-right: 10px;
+		    color: #34495e;
+		    border-radius: 6px 6px 0px 0px;
+    		width: 100px;
+		    height: 30px;
+		    font-size: 19px;
 		}
 
 	</style>
@@ -143,10 +164,10 @@
             <tr>
               <td width="25%" class="pbm">
 				  <div class="palette palette-wet-asphalt">
-					<dt style="text-align:center; margin-top: 20px">Potato</dt>
+					<dt style="text-align:center; margin-top: 20px">Onion</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Onion" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
               </td>
               <td width="25%" class="pbm">
@@ -154,33 +175,33 @@
 					<dt style="text-align:center; margin-top: 20px">Tomato</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Tomato" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
 			  </td>
 			  <td width="25%" class="pbm">
 				  <div class="palette palette-wet-asphalt">
-					<dt style="text-align:center; margin-top: 20px">Pumpkin</dt>
+					<dt style="text-align:center; margin-top: 20px">Cabbage</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Cabbage" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
 			  </td>
               <td width="25%" class="pbm">
 				  <div class="palette palette-wet-asphalt">
-					<dt style="text-align:center; margin-top: 20px">Bell pepper</dt>
+					<dt style="text-align:center; margin-top: 20px">Pepper</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Pepper" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
 			  </td>
             </tr>
             <tr>
               <td width="25%" class="pbm">
 				  <div class="palette palette-wet-asphalt">
-					<dt style="text-align:center; margin-top: 20px">Broccoli</dt>
+					<dt style="text-align:center; margin-top: 20px">Eggplant</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Eggplant" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
               </td>
               <td width="25%" class="pbm">
@@ -188,7 +209,7 @@
 					<dt style="text-align:center; margin-top: 20px">Lettuce</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Lettuce" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
 			  </td>
 			  <td width="25%" class="pbm">
@@ -196,15 +217,15 @@
 					<dt style="text-align:center; margin-top: 20px">Carrot</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Carrot" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
 			  </td>
               <td width="25%" class="pbm">
 				  <div class="palette palette-wet-asphalt">
-					<dt style="text-align:center; margin-top: 20px">Banana</dt>
+					<dt style="text-align:center; margin-top: 20px;">Celery</dt>
 				  </div>
 				  <div  style="margin-left:70px; margin-top:20px; " >
-					<input type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
+					<input id="Celery" type="checkbox" data-toggle="switch" id="custom-switch-03" data-on-text="<span class='fui-check'></span>" data-off-text="<span class='fui-cross'></span>" />
 				  </div>
 			  </td>
             </tr>
@@ -220,17 +241,75 @@
 		</div>
       </div>
       <div class="row ResultES" id="ResultSec">
-        <div class="col-md-6 column">
+        <div class="col-md-8 column">
+        		<ul id="myTab" class="nav nav-tabs" role="tablist">
+				    <li role="presentation" class="active"><a  class="btn btn-large btn-block btn-primary" href="#veg" role="tab" data-toggle="tab" style="#769FEA">Veggie</a></li>
+				    <li role="presentation"><a  class="btn btn-large btn-block btn-primary" href="#shop" aria-controls="profile" role="tab" data-toggle="tab" style="#769FEA">Shop</a></li>
+				</ul>
           <div class="panel" id="ResultPanel" width="100%">
-			<div class="panel-inside">
-				<h5 id="MarketName"></h5>
-				<p id="Address"></p>
-				<p id="Schedule"></p>
-				<p id="Distance"></p>
-				<p id="walking" style="margin-left:20px"></p>
-				<p id="driving" style="margin-left:20px"></p>
-				
+			<div class="panel-inside" id="test" role="tabpanel">
+				<div class="tab-content">
+					<div role="tabpanel" class="tab-pane active" id="veg">
+						<div id="OnionR">
+							<p id="OnionRname"></p>
+							<div id="OnionRSeason"></div>
+							<div id="OnionRClimate"></div>
+							<div id="OnionRPrice"></div>
+						</div>
+						<div id="TomatoR">
+							<p id="TomatoRname"></p>					
+							<div id="TomatoRSeason"></div>
+							<div id="TomatoRClimate"></div>
+							<div id="TomatoRPrice"></div>
+						</div>
+						<div id="CabbageR">
+							<p id="CabbageRname"></p>
+							<div id="CabbageRSeason"></div>
+							<div id="CabbageRClimate"></div>
+							<div id="CabbageRPrice"></div>
+						</div>
+						<div id="PepperR">
+							<p id="PepperRname"></p>
+							<div id="PepperRSeason"></div>
+							<div id="PepperRClimate"></div>
+							<div id="PepperRPrice"></div>
+						</div>
+						<div id="EggplantR">
+							<p id="EggplantRname"></p>
+							<div id="EggplantRSeason"></div>
+							<div id="EggplantRClimate"></div>
+							<div id="EggplantRPrice"></div>
+						</div>
+						<div id="LettuceR">
+							<p id="LettuceRname"></p>
+							<div id="LettuceRSeason"></div>
+							<div id="LettuceRClimate"></div>
+							<div id="LettuceRPrice"></div>
+						</div>
+						<div id="CarrotR">
+							<p id="CarrotRname"></p>
+							<div id="CarrotRSeason"></div>
+							<div id="CarrotRClimate"></div>
+							<div id="CarrotRPrice"></div>
+						</div>
+						<div id="CeleryR">
+							<p id="CeleryRname"></p>
+							<div id="CeleryRSeason"></div>
+							<div id="CeleryRClimate"></div>
+							<div id="CeleryRPrice"></div>
+						</div>
+					</div>
+					<div role="tabpanel" class="tab-pane" id="shop">
+						<div><h5 id="MarketName"></h5></div>
+						<div><p id="Address"></p></div>
+						<div><p id="Schedule"></p></div>
+						<div><p id="Distance"></p></div>
+						<div><p id="walking" style="margin-left:20px"></p></div>
+						<div><p id="driving" style="margin-left:20px"></p></div>
+					</div>
+				</div>
 			<!--
+				<div id="MarketName"><h5>Click the farmer's market in google map to see details</h5></div>
 				<div id="MarketName"><h5>Click the farmer's market in google map to see details</h5></div>
 				
 				
@@ -247,7 +326,7 @@
 			</div>
           </div>
         </div>
-		<div class="col-md-6 column"> 
+		<div class="col-md-4 column"> 
 		  <div id="Resultlocation" style="width:100%; height:500px; border-radius: 6px 6px 6px 6px;" name="Resultlocation"></div>
         </div>
       </div>
@@ -261,10 +340,14 @@
 	<script type="text/javascript" src="https://www.google.com/jsapi"></script>
 	<!--flat-ui -->
 	<script src="dist/js/vendor/jquery.min.js"></script>
-    <script src="dist/js/vendor/video.js"></script>
     <script src="dist/js/flat-ui.min.js"></script>
     <script src="docs/assets/js/application.js"></script>
 	<!--d3 -->
 	<script src="http://d3js.org/d3.v3.min.js"></script>
+	<script src="js/bullet.js"></script>
+	<!--csv handling -->
+	<script src="js/jquery.csv.js"></script>
+	<!-- jquery.pin.js -->
+	<script src="/js/jquery.pin.js"></script>
   </body>
 </html>

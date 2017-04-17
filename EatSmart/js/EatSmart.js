@@ -23,6 +23,10 @@ var distanceWalking = [];
 var durationWalking = [];
 //var LatLng2;
 
+//bullet chart
+var rateSeason = [];
+
+
 function myMap() {
 	var myCenter = new google.maps.LatLng(40.424758,-86.9114603);
 	var mapCanvas = document.getElementById("Userlocation");
@@ -87,7 +91,6 @@ function myMap() {
 	});
 			  
 }
-		
 
 function Generate(){
 	
@@ -98,15 +101,17 @@ function Generate(){
 	markerResult = new google.maps.Marker({position:LatLngInit});
 	markerResult.setMap(mapResult);
 	
-		
+	
 	//json format data resource url 
 	var USDAurl = "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/zipSearch?zip=47906";
 	//Use the zip code and return all market ids in area.
 	
 	var NCDCurl = "";
 	
-	//LjddxCbePddEhRNBUOUickPrpZImPZCV
+
+
 	$.ajax({
+		
 		type: "GET",
 		contentType: "application/json; charset=utf-8",
 		url: USDAurl,
@@ -130,6 +135,7 @@ function Generate(){
 					// submit a get request to the restful service mktDetail.
 					url: "http://search.ams.usda.gov/farmersmarkets/v1/data.svc/mktDetail?id=" + v,
 					dataType: 'jsonp',
+
 					success: function (data) {
 
 						for (var key in data) {
@@ -248,4 +254,271 @@ function Generate(){
 			}); //end .each
 		}
 	});
+	
+	if($('#Onion').prop('checked')){
+		SetD3("#OnionR","Onion");
+		console.log("Onion is " + $('#Onion').prop('checked'));
+	}else{
+		$('#OnionRname').html('');
+		$('#OnionRSeason').html('');
+		$('#OnionRClimate').html('');
+		$('#OnionRPrice').html('');
+	}
+	
+	if($('#Tomato').prop('checked')){
+		SetD3("#TomatoR","Tomato");
+		console.log("Cabbage is " + $('#Tomato').prop('checked'));
+	}else{
+		$('#TomatoRname').html('');
+		$('#TomatoRSeason').html('');
+		$('#TomatoRClimate').html('');
+		$('#TomatoRPrice').html('');
+	}
+	
+	if($('#Cabbage').prop('checked')){
+		SetD3("#CabbageR","Cabbage");
+		console.log("Cabbage is " + ($('#Cabbage').prop('checked')));
+	}else{
+		$('#CabbageRname').html('');
+		$('#CabbageRSeason').html('');
+		$('#CabbageRClimate').html('');
+		$('#CabbageRPrice').html('');
+	}
+
+	if($('#Pepper').prop('checked')){
+		SetD3("#PepperR","Pepper");
+		console.log("Pepper is " + $('#Pepper').prop('checked'));
+	}else{
+		$('#PepperRname').html('');
+		$('#PepperRSeason').html('');
+		$('#PepperRClimate').html('');
+		$('#PepperRPrice').html('');
+	}
+
+	if($('#Celery').prop('checked')){
+		SetD3("#CeleryR","Celery");
+		console.log("Celery is " + $('#Celery').prop('checked'));
+	}else{
+		$('#CeleryRname').html('');
+		$('#CeleryRSeason').html('');
+		$('#CeleryRClimate').html('');
+		$('#CeleryRPrice').html('');
+	}
+
+	if($('#Lettuce').prop('checked')){
+		SetD3("#LettuceR","Lettuce");
+		console.log("Lettuce is " + $('#Lettuce').prop('checked'));
+	}else{
+		$('#LettuceRname').html('');
+		$('#LettuceRSeason').html('');
+		$('#LettuceRClimate').html('');
+		$('#LettuceRPrice').html('');
+	}
+
+	if($('#Carrot').prop('checked')){
+		SetD3("#CarrotR","Carrot");
+		console.log("Carrot is " + $('#Carrot').prop('checked'));
+	}else{
+		$('#CarrotRname').html('');
+		$('#CarrotRSeason').html('');
+		$('#CarrotRClimate').html('');
+		$('#CarrotRPrice').html('');
+	}	
+	
+	if($('#Eggplant').prop('checked')){
+		SetD3("#EggplantR","Eggplant");
+		console.log("Eggplant is " + $('#Eggplant').prop('checked'));
+	}else{
+		$('#EggplantRname').html('');
+		$('#EggplantRSeason').html('');
+		$('#EggplantRClimate').html('');
+		$('#EggplantRPrice').html('');
+	}
+	//SetD3();
+
 }
+
+
+
+
+function SetD3(div,name){
+	//console.log(dataChart);
+	//var divtmp = div + 'Season';
+	//var nametmp = name;
+
+	$(div + "name").html(name);
+	
+	//update season
+	SetSeason(div,name);
+	SetClimate(div,name)
+
+
+}
+
+function SetSeason(div,name){
+	$.ajax({
+	    type: "GET",
+	    url: "csv/season.csv",
+	    dataType: "text",
+	    success: function(data) { 
+			var dat = $.csv.toObjects(data);
+	        console.log(dat[0].Name);
+	        $.each(dat,function(k, v) {
+	        	console.log(k);
+	        	console.log(v);
+	        	if(v.Name == name){
+	        		/////////////////////
+	        		var margin = {top: 5, right: 40, bottom: 20, left: 120},
+					width = 500 - margin.left - margin.right,
+					height = 50 - margin.top - margin.bottom;
+
+					var chart = d3.bullet()
+					.width(width)
+					.height(height);
+	        		/////////////////////
+	        		var dataChart = [
+					  {"title":"Season","subtitle":"Seasonality Charts","ranges":[0,0,10],"measures":[0,10],"markers":[0]}
+					];
+	        		console.log(div + "Season");
+	        		console.log(v.Name + " is " + v.Apr);
+	        		rateSeason[0] = v.Apr;
+	        		dataChart[0].markers = rateSeason;
+	        		console.log("Season done!!");
+	        		////////////////
+	        		var svg = d3.select(div + "Season").selectAll("svg")
+					  .data(dataChart)
+					.enter().append("svg")
+					  .attr("class", "bullet")
+					  .attr("width", width + margin.left + margin.right)
+					  .attr("height", height + margin.top + margin.bottom)
+					.append("g")
+					  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+					  .call(chart);
+
+					  var title = svg.append("g")
+						  .style("text-anchor", "end")
+						  .attr("transform", "translate(-6," + height / 2 + ")");
+
+					  title.append("text")
+						  .attr("class", "title")
+						  .text(function(d) { return d.title; });
+
+					  title.append("text")
+						  .attr("class", "subtitle")
+						  .attr("dy", "1em")
+						  .text(function(d) { return d.subtitle; });
+
+	        	}
+	        });
+	    }
+	});
+}
+
+function SetClimate(div,name){
+	$.ajax({
+	    type: "GET",
+	    url: "csv/grow.csv",
+	    dataType: "text",
+	    success: function(data) { 
+			var dat = $.csv.toObjects(data);
+			var tmin;
+	        var tmax;
+	        var tavg;
+	        console.log(dat[0].Name);
+	        $.each(dat,function(k, v) {
+
+	        	console.log(k);
+	        	console.log(v);
+	        	if(v.Name == name){
+	        		
+	        		$.ajax({
+	        			type:"get",
+	        			url:"https://www.ncdc.noaa.gov/cdo-web/api/v2/data?datasetid=GSOM&stationid=GHCND:USC00129430&locationid=ZIP:47906&units=standard&startdate=2016-03-15&enddate=2016-04-15",
+	        			headers:{
+	        				"token": "LjddxCbePddEhRNBUOUickPrpZImPZCV"
+	        			}
+	        		}).done(function(data){
+					    console.log(data);
+					    for (var key in data.results) {
+					    	if(data.results[key].datatype == "EMXT"){
+					    		tmax = data.results[key].value;
+					    		console.log(data.results[key]);
+					    	}
+					    	if(data.results[key].datatype == "EMNT"){
+					    		tmin = data.results[key].value;
+					    		console.log(data.results[key]);
+					    	}
+
+							//var googleLink = results['GoogleLink'];
+						}
+						console.log(tmax+" test "+tmin); 
+						tavg = (tmax + tmin)/2;
+						console.log(tavg);
+
+						var slope;
+						var cor;
+						var PercentCM = [];
+
+						if(tavg >= v.Temp && tavg <= v.Highest){
+							slope = 10/(v.Temp - v.Highest);
+							cor = -slope*v.Highest;
+							PercentCM[0] = slope*tavg + cor;
+						}else
+						if(tavg <= v.Temp && tavg >= v.Lowest){
+							slope = 10/(v.Temp - v.Lowest);
+							cor = -slope*v.Lowest;
+							PercentCM[0] = slope*tavg + cor;
+						}else{
+							PercentCM[0] = 0;
+						}
+
+						console.log(PercentCM[0]);
+
+						var margin = {top: 5, right: 40, bottom: 20, left: 120},
+						width = 500 - margin.left - margin.right,
+						height = 50 - margin.top - margin.bottom;
+
+						var chart = d3.bullet()
+						.width(width)
+						.height(height);
+		        		/////////////////////
+		        		var dataChart = [
+						  {"title":"Climate","subtitle":"Climate suitability","ranges":[0,0,10],"measures":[0,10],"markers":[0]}
+						];
+		        		console.log(div + "Climate");
+		        		console.log(v.Name + " is " + v.Temp);
+		        		dataChart[0].markers = PercentCM;
+		        		console.log("Climate done!!");
+		        		////////////////
+		        		var svg = d3.select(div + "Climate").selectAll("svg")
+						  .data(dataChart)
+						.enter().append("svg")
+						  .attr("class", "bullet")
+						  .attr("width", width + margin.left + margin.right)
+						  .attr("height", height + margin.top + margin.bottom)
+						.append("g")
+						  .attr("transform", "translate(" + margin.left + "," + margin.top + ")")
+						  .call(chart);
+
+						  var title = svg.append("g")
+							  .style("text-anchor", "end")
+							  .attr("transform", "translate(-6," + height / 2 + ")");
+
+						  title.append("text")
+							  .attr("class", "title")
+							  .text(function(d) { return d.title; });
+
+						  title.append("text")
+							  .attr("class", "subtitle")
+							  .attr("dy", "1em")
+							  .text(function(d) { return d.subtitle; });
+					}); 
+	        		
+
+	        	}
+	        });
+	    }
+	});
+}
+
+$('#myTab').tabCollapse();
